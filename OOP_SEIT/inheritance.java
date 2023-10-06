@@ -4,26 +4,67 @@ import java.util.*;
 
 class Employee
 {
+	// Declared Scanner
 	Scanner sc = new Scanner(System.in) ;
+	
+	//Employee Data Variables
 	String emp_name ;
 	String address ;
 	String mail_id ;
 	String mobile  ;
 	int emp_id ;
 	
+	//To Get Employee Data
 	public void getData() {
 		System.out.println("Enter the Employee Name : ");
 		this.emp_name = sc.next();
 		System.out.println("Enter address of Employee : ");
 		this.address = sc.next();
-		System.out.println("Enter mail address             : ");
-		this.mail_id = sc.next();
-		System.out.println("Enter mobile number         : ");
-		this.mobile = sc.next();
+		//To Check and Enter Email ID Until it's Incorrect
+		boolean mailcheck=false;
+		while(mailcheck==false)
+		{
+			System.out.println("Enter mail address             : ");
+			this.mail_id = sc.next();
+			mailcheck = true;
+			boolean attherate = false, dot = false;
+			char ch[]= this.mail_id.toCharArray();
+			for(int i=0; i<this.mail_id.length();i++)
+			{
+				if(ch[i]=='@')
+				{
+					attherate = true;
+				}
+				else if(ch[i]=='.')
+				{
+					dot = true;
+				}
+			}
+			if(!dot | !attherate)
+			{
+				System.out.println("Invalid Mail ID!, Enter again");
+				mailcheck=false;
+			}
+		}
+		//To Check and Enter Mobile Number Until it's Incorrect
+		boolean mobilecheck=false;
+		while(mobilecheck==false)
+		{
+			System.out.println("Enter mobile number         : ");
+			this.mobile = sc.next();
+			mobilecheck=true;
+			char ch[]= this.mobile.toCharArray();
+			if(ch[0]=='0' & ch.length!=10)
+			{
+				System.out.println("Invalid Mobile Number!, Enter again");
+				mobilecheck=false;
+			}
+		}
 		System.out.println("Enter Employee ID             : ");
 		this.emp_id = sc.nextInt();
 	}
 	
+	//To Display Employee Data
 	public void Display() {
 		System.out.println("Employee ID     : "+emp_id);
 		System.out.println("Employee Name: "+emp_name);
@@ -32,85 +73,77 @@ class Employee
 		System.out.println("Mail address     : "+mail_id);
 	}
 	
-	double basic , da , hra , pf , club , gross , net ;
+	//Allowances of the Employee
+	double da , hra , pf , club , gross , net ;
 	
-	public void GetSalary() {
-		System.out.println("Enter the this.basic Salary of the Employee: ");
-		this.basic = sc.nextDouble();
-	}
+	//To Calculate Salary
+	public void calculateSal(double basic)
+    {
+        this.da = basic*0.97 ;
+        this.hra = basic*0.1 ;
+        this.pf = basic*0.12 ;
+        this.club = basic*0.001 ;
+        this.gross = basic - this.pf ;
+        this.net = this.gross - this.hra - this.club ;
+    }
 	
-	public void DisplaySalary() {
-		System.out.println("this.basic Salary of the Employee                : " + this.basic);
-		System.out.println("Dearness Allowance of the Employee    : " + this.da );
-		System.out.println("House Rent Allowance of the Employee: " + this.hra);
-		System.out.println("Provident Fund of the Employee            : " + this.pf);
-		System.out.println("Staff this.club Fund of the Employee           : " + this.club);
-		System.out.println("this.gross Salary of the Employee                : " + this.gross);
-		System.out.println("this.net Salary Fund of the Employee           : " + this.net);
+	//To Display Salary and allowances of Employee
+	public void DisplaySalary(double basic) {
+		System.out.println("Basic Salary                      : " + basic);
+		System.out.println("Dearness Allowance          : " + this.da );
+		System.out.println("House Rent Allowance      : " + this.hra);
+		System.out.println("Provident Fund                  : " + this.pf);
+		System.out.println("Staff Club Fund                 : " + this.club);
+		System.out.println("Gross Salary                      : " + this.gross);
+		System.out.println("Net Salary Fund                : " + this.net);
 	}
 }
 
 class Programmer extends Employee
 {
-	public void calculateSal()
-    {
-        this.da = this.basic*0.97 ;
-        this.hra = this.basic*0.1 ;
-        this.pf = this.basic*0.12 ;
-        this.club = this.basic*0.001 ;
-        this.gross = this.basic - this.pf ;
-        this.net = this.gross - this.hra - this.club ;
-    }
+	double basic ;
+	public void GetSalary() {
+		System.out.println("Enter the Basic Salary of the Employee: ");
+		this.basic = sc.nextDouble();
+	}
 }
 
-class teamLead extends Employee
+class TeamLead extends Employee
 {
-	public void calculateSal()
-    {
-        this.da = this.basic*0.97 ;
-        this.hra = this.basic*0.1 ;
-        this.pf = this.basic*0.12 ;
-        this.club = this.basic*0.001 ;
-        this.gross = this.basic - this.pf ;
-        this.net = this.gross - this.hra - this.club ;
-    }
+	double basic ;
+	public void GetSalary() {
+		System.out.println("Enter the Basic Salary of the Employee: ");
+		this.basic = sc.nextDouble();
+	}
 }
 
-class projectManager extends Employee
+class ProjectManager extends Employee
 {
-	public void calculateSal()
-    {
-        this.da = this.basic*0.97 ;
-        this.hra = this.basic*0.1 ;
-        this.pf = this.basic*0.12 ;
-        this.club = this.basic*0.001 ;
-        this.gross = this.basic - this.pf ;
-        this.net = this.gross - this.hra - this.club ;
-    }
+	double basic ;
+	public void GetSalary() {
+		System.out.println("Enter the Basic Salary of the Employee: ");
+		this.basic = sc.nextDouble();
+	}
 }
 
-class assistantprojectManager extends Employee
+class AssistantprojectManager extends Employee
 {
-	public void calculateSal()
-    {
-        this.da = this.basic*0.97 ;
-        this.hra = this.basic*0.1 ;
-        this.pf = this.basic*0.12 ;
-        this.club = this.basic*0.001 ;
-        this.gross = this.basic - this.pf ;
-        this.net = this.gross - this.hra - this.club ;
-    }
+	double basic ;
+	public void GetSalary() {
+		System.out.println("Enter the Basic Salary of the Employee: ");
+		this.basic = sc.nextDouble();
+	}
 }
 
 public class inheritance {
-	  public static void menu(){
+	  public static void menu() {
 	      System.out.println("\n---------------------------------------") ;
-	      System.out.println("1.Programmer") ;
-	      System.out.println("2.Team Leader") ;
-	      System.out.println("3.Project Manager") ;
-	      System.out.println("4.Assistant Project Manager") ;
-	      System.out.println("0.Exit") ;
-	      System.out.println("---------------------------------------") ;
+	      System.out.println("1.Programmer------------------------") ;
+	      System.out.println("2.Team Leader-----------------------") ;
+	      System.out.println("3.Project Manager-------------------") ;
+	      System.out.println("4.Assistant Project Manager------") ;
+	      System.out.println("0.Exit-----------------------------------") ;
+	      System.out.println("-------------------------------------------") ;
 	}
 	 
 	public static void main(String[] args) {
@@ -129,33 +162,33 @@ public class inheritance {
 				Programmer obj = new Programmer();
 				obj.getData();
 				obj.GetSalary();
-				obj.calculateSal();
+				obj.calculateSal(obj.basic);
 				obj.Display();
-				obj.DisplaySalary();
+				obj.DisplaySalary(obj.basic);
 				break;
 			case 2:
-				teamLead obj1 = new teamLead();
+				TeamLead obj1 = new TeamLead();
 				obj1.getData();
 				obj1.GetSalary();
-				obj1.calculateSal();
+				obj1.calculateSal(obj1.basic);
 				obj1.Display();
-				obj1.DisplaySalary();
+				obj1.DisplaySalary(obj1.basic);
 				break;
 			case 3:
-				projectManager obj2 = new projectManager();
+				ProjectManager obj2 = new ProjectManager();
 				obj2.getData();
 				obj2.GetSalary();
-				obj2.calculateSal();
+				obj2.calculateSal(obj2.basic);
 				obj2.Display();
-				obj2.DisplaySalary();
+				obj2.DisplaySalary(obj2.basic);
 				break;
 			case 4:
-				assistantprojectManager obj3 = new assistantprojectManager();
+				AssistantprojectManager obj3 = new AssistantprojectManager();
 				obj3.getData();
 				obj3.GetSalary();
-				obj3.calculateSal();
+				obj3.calculateSal(obj3.basic);
 				obj3.Display();
-				obj3.DisplaySalary();
+				obj3.DisplaySalary(obj3.basic);
 				break;
 			default:
 				System.out.println("Invalid Choice Enter again : ");
