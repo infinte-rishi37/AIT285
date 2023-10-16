@@ -1,86 +1,99 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct node
-{
+struct node{
     int data;
     node *next;
+    node(int val){
+        data = val;
+        next = NULL;
+    }
 };
 
-class stack1
-{
-    node *top = NULL;
-    node *push(int val, node *top)
-    {
-        node *ptr, *tmp=top;
-        ptr = new node;
-        tmp->data = val;
-        tmp->next = top;
-        top = tmp;
-        return top;
+class stack1{
+    node *top;
+    public:
+    stack1(){
+        top = NULL;
     }
-    node *pop(node *top)
-    {
-        if(top == NULL)
+    bool isEmpty(){
+        return top==NULL;
+    }
+    void push(int val){
+        node *tmp = new node(val);
+        if(top==NULL){
+            temp->next = NULL;
+        }
+        else{
+            tmp->next = top;
+        }
+        top = tmp;
+    }
+    void pop(){ 
+        if(isEmpty())
         {
-            cout << "The Stack is Empty, No deletion can be performed.\n";
+            cout << "Stack Underflow\n";
         }
         else
         {
             node *tmp = top;
+            cout << tmp->data << " deleted from top successfully \n";
             top = top->next;
-            delete(tmp);
+            delete tmp;
         }
-        return top;
     }
-    void display(node *top)
-    {
+    void display(){
         node *ptr = top;
-        if(ptr == NULL)
+        if(isEmpty())
         {
             cout << "Stack is Empty\n";
         }
         else
         {
-            while(ptr->next!=NULL)
+            while( ptr != NULL )
             {
                 cout << ptr->data << ' ';
+                ptr = ptr->next;
             }
             cout << ptr->data << endl;
         }
     }
 };
 
-
 void menu()
 {
     cout << "Enter 1 To Push Data. \n";
     cout << "Enter 2 To Pop Data\n";
+    cout << "Enter 3 to Display data\n";
     cout << "Enter 0 To Exit \n";
 }
 
-signed main()
+int main()
 {
     stack1 stk;
-    stk.top = NULL;
     int choice = 1, val;
-    do 
+    menu();
+    do
     {
-        menu();
+        cout << "Enter your Choice :";
         cin >> choice;
         switch(choice)
         {
             case 1:
                 cout << "Enter the Value: ";
                 cin >> val;
-                top = stack1.push(val, stk.top);
+                stk.push(val);
                 break;
             case 2:
-                stack1.pop(stk.top);
+                stk.pop();
+                break;
+            case 3:
+                stk.display();
                 break;
             default:
-                cout << "Enter Valid Value.\n";
+                cout << "!! Enter Valid Value :";
         }
     }
-    while(choice)
+    while(choice);
+    return 0;
 }

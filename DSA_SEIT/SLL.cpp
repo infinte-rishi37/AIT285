@@ -17,8 +17,8 @@ struct node
 
 node *Create(int val)
 {
-    node *tmp;
-    tmp = new node;
+    struct node *tmp;
+    tmp = (struct node*) malloc(sizeof(node));
     tmp->data = val;
     tmp->next = NULL;
     return tmp;
@@ -89,7 +89,7 @@ node *Delete_Front(node *head)
         ptr = head;
         head = ptr->next;
         cout << "Node with data " << ptr->data << " deleted successfully\n";
-        delete(ptr);
+        free(ptr);
     }
     return head;
 }
@@ -122,6 +122,32 @@ node *Delete_end(node *head)
     return head;
 }
 
+
+node *delete_position(int pos, node *head)
+{
+    struct node *ptr, *ptr1;
+    ptr = head;
+    if(head == NULL)
+    {
+        return head;
+    }
+    else if(head->data == pos)
+    {
+        head == NULL;
+    }
+    else
+    {
+        while(ptr->data!=pos)
+        {
+            ptr1= ptr;
+            ptr = ptr->next;
+        }
+        ptr1->next = ptr->next;
+        delete(ptr);
+    }
+    return head;
+}
+
 node *Delete_pos(int pos,node *head)
 {
     node *ptr, *ptr1;
@@ -142,9 +168,113 @@ node *Delete_pos(int pos,node *head)
             ptr1 = ptr;
             ptr = ptr->next;
         }
-        ptr1->next = ptr->next;
-        cout << "Node with data " << ptr->data << " deleted successfully\n";
+        if( ptr->data != pos )
+        {
+            cout << "Such data does'nt Exists\n" ;
+        }
+        else
+        {
+            ptr1->next = ptr->next;
+            cout << "Node with data " << ptr->data << " deleted successfully\n";
+            delete(ptr);
+        }
+    }
+    return head;
+}
+
+node *Delete_left(int pos,node *head)
+{
+    node *ptr, *ptr1, *ptr2;
+    ptr = head;
+    if(head == NULL || head->next == NULL || head->data == pos)
+    {
+        cout << "Such data does'nt Exists\n" ;
+    }
+    else if(head->next->data == pos)
+    {
+        cout << "Node with data " << head->data << " deleted successfully\n";
+        head = head->next;
         delete(ptr);
+    }
+    else
+    {
+        while(ptr->data != pos)
+        {
+            ptr2 = ptr1;
+            ptr1 = ptr;
+            ptr = ptr->next;
+        }
+        if( ptr->data != pos )
+        {
+            cout << "Such data does'nt Exists\n" ;
+        }
+        else
+        {
+            ptr2->next = ptr;
+            cout << "Node with data " << ptr1->data << " deleted successfully\n";
+            delete(ptr1);
+        }
+    }
+    return head;
+}
+
+node *Delete_right(int pos,node *head)
+{
+    node *ptr, *ptr1, *ptr2;
+    ptr = head;
+    if(head == NULL || head->next == NULL)
+    {
+        cout << "Such data does'nt Exists\n" ;
+    }
+    else if(head->data == pos)
+    {
+        ptr1 = head->next;
+        head->next = ptr1->next;
+        cout << "Node with data " << ptr1->data << " deleted successfully\n";
+        delete(ptr1);
+    }
+    else
+    {
+        while(ptr->data != pos)
+        {
+            ptr = ptr->next;
+        }
+        if( ptr->data != pos || ptr->next== NULL)
+        {
+            cout << "Such data does'nt Exists\n" ;
+        }
+        else
+        {
+            ptr1 = ptr->next;
+            ptr->next = ptr1->next;
+            cout << "Node with data " << ptr1->data << " deleted successfully\n";
+            delete(ptr1);
+        }
+    }
+    return head;
+}
+
+//Reeverse a Linked list
+
+node *reverse(node *head)
+{
+    node *ptr, *ptr1, *ptr2;
+    ptr = head;
+    ptr1 =  NULL;
+    if(ptr==NULL)
+    {
+        cout << "Empty\n";
+    }
+    else
+    {
+        while(ptr!=NULL)
+        {
+            ptr2 = ptr1;
+            ptr1 = ptr;
+            ptr = ptr->next;
+            ptr1->next = ptr2;
+        }
+        head = ptr1;
     }
     return head;
 }
@@ -172,7 +302,10 @@ void menu()
     cout << "Enter 4 To Delete Data at Front\n";
     cout << "Enter 5 To Delete Data at End\n";
     cout << "Enter 6 To Delete Data at Position\n";
-    cout << "Enter 7 To Show Data \n";
+    cout << "Enter 7 To Delete Data at Left of Position\n";
+    cout << "Enter 8 To Delete Data at Right of Position\n";
+    cout << "Enter 9 To Reverse Linked List\n";
+    cout << "Enter 10 To Show Data \n";
     cout << "Enter 0 To Exit \n";
 }
 
@@ -221,6 +354,19 @@ int main()
             head = Delete_pos(pos,head);
             break;
         case 7:
+            cout<<"Enter position of the node :  ";
+            cin>>pos;
+            head = Delete_left(pos,head);
+            break;
+        case 8:
+            cout<<"Enter position of the node :  ";
+            cin>>pos;
+            head = Delete_right(pos,head);
+            break;
+        case 9:
+            head = reverse(head);
+            break;
+        case 10:
             print (head);
             break;
         default:

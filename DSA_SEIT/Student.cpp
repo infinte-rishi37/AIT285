@@ -109,7 +109,7 @@ void Quicksort(student *p[], int lb, int ub)
 {
 	if(lb < ub)
 	{
-		int loc = partition(p, lb, ub);
+		int loc = partition(p, lb, ub);h
 		Quicksort(p, lb, loc - 1);
 		Quicksort(p, loc + 1, ub);
 	}
