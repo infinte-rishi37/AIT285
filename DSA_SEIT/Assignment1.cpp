@@ -118,7 +118,7 @@ void menu(){
 	cout << "\n\t4. Display List of ten toppers (Quick Sort)";
 	cout << "\n\t5. Find Student data by SGPA (Linear Search)";
 	cout << "\n\t6. Find Student data by Name (Binary Search)";
-	cout << "\n\t*. Exit";
+	cout << "\n\t0. Exit";
 	cout << "\n===================================================================";
 	cout << "\n Enter your choice : ";
 }
@@ -129,49 +129,49 @@ int main(){
 	do{
 		menu();
 		cin>>choice;
-		switch(choice){
+		switch(choice) {
 			case 1:
-			cout << "\nEnter Number of students you want to add (1-15):";
-			cin >> n;
-			cout << "\nInput data : \t RollNo \t Name \t sgpa";
-			for(int i=0;i<n;i++){
-				cout << "\nStudent " <<i+1<<" :\t";
-				int roll;
-				string name;
-				float sgpa;
-				cin >> roll >> name >> sgpa;
-				arr[i] = new student(roll, name , sgpa);
-			}
-			cout << " Added Records Successfully \n";
-			break;
+				cout << "\nEnter Number of students you want to add (1-15):";
+				cin >> n;
+				cout << "\nInput data : \t RollNo \t Name \t sgpa";
+				for(int i=0;i<n;i++){
+					cout << "\nStudent " <<i+1<<" :\t";
+					int roll;
+					string name;
+					float sgpa;
+					cin >> roll >> name >> sgpa;
+					arr[i] = new student(roll, name , sgpa);
+				}
+				cout << " Added Records Successfully \n";
+				break;
 			case 2:
-			bubbleSort(arr, n);
-			Display(arr, n);
+				bubbleSort(arr, n);
+				Display(arr, n);
 			break;
 			case 3:
-			insertionSort(arr, n);
-			Display(arr, n);
+				insertionSort(arr, n);
+				Display(arr, n);
 			break;
 			case 4:
-			quickSort(arr, 0, n-1);
-			Display(arr, 10);
+				quickSort(arr, 0, n-1);
+				Display(arr, 10);
 			break; 
 			case 5:
-			quickSort(arr, 0, n-1);
+				quickSort(arr, 0, n-1);
 			float find;
 			cout << "\nEnter the sgpa to find :";
 			cin>>find;
-			linear_search(arr, find, n);
+				linear_search(arr, find, n);
 			break;
 			case 6:
-			insertionSort(arr, n);
-			string fin;
-			cout << "\nEnter the sgpa to find :";
-			cin>>fin;
-			binary_search(arr, fin, n);
+				insertionSort(arr, n);
+				string fin;
+				cout << "\nEnter the sgpa to find :";
+				cin>>fin;
+				binary_search(arr, fin, n);
 			break;
-			default:
-			choice=0;
+			case 0:
+			break;
 		}
 	}while(choice);
 }

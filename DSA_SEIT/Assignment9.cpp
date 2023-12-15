@@ -53,7 +53,6 @@ void heapSort_maxHeap(int arr[], int n){
 }
 
 void heapSort_minHeap(int arr[], int n){
-
     for(int i=n/2 -1;i>=0;i--){
         heapify_minheap(arr, n, i);
     }
