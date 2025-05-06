@@ -1,0 +1,26 @@
+mern-user-app/
+├── client/                     # React frontend
+│   ├── public/                 # Static assets for React
+│   │   ├── index.html          # HTML template for React app
+│   │   └── favicon.ico         # Favicon for the app
+│   ├── src/                    # Source code for React
+│   │   ├── components/         # React components
+│   │   │   ├── Register.js     # Component for user registration
+│   │   │   ├── Login.js        # Component for user login
+│   │   │   └── Profile.js      # Component for displaying and managing user profile
+│   │   ├── App.js              # Main React component with routing
+│   │   ├── index.js            # Entry point for React
+│   │   └── styles.css          # Basic CSS styling for the app
+│   ├── package.json            # Frontend dependencies and scripts
+│   └── .env                    # Environment variables (e.g., API URL)
+├── server/                     # Express backend
+│   ├── config/                 # Configuration files
+│   │   └── db.js               # MongoDB connection setup
+│   ├── models/                 # Mongoose schemas
+│   │   └── User.js             # User schema for MongoDB
+│   ├── routes/                 # API routes
+│   │   └── userRoutes.js       # Routes for user CRUD operations
+│   ├── server.js               # Main Express server file
+│   ├── package.json            # Backend dependencies and scripts
+│   └── .env                    # Environment variables (e.g., MongoDB URI)
+├── README.md                   # Project documentation
